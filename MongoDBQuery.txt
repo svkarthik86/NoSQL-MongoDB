@@ -1,0 +1,56 @@
+*** create Database****
+use edu-db
+
+*** view/list out  the database****
+show dbs
+
+*** create Collection****
+db.createCollection("Students")
+db.createCollection("Employee")
+
+***view/list out  the Collections****
+show collections
+
+***create Students Document using insertMany() function***
+
+db.Students.insertMany([{"name":"Sukanya","rollno":1001,"age":22,"address":"pune","degree":"BE"},
+{"name":"Sehal","rollno":1002,"age":23,"address":"pune","degree":"BTech"},
+{"name":"Bharathan","rollno":1004,"age":22,"address":"chennai","degree":"BTech"},
+{"name":"Darshan","rollno":1006,"age":24,"address":"chennai","degree":"MTech"}
+])
+
+**** read documents****
+db.Students.find()
+
+***** count the Document with filter*******
+db.Students.find({"address":"chennai"}).count()
+
+***Filter Document and Project Selected fields******
+db.Students.find({"address":"chennai"},{"name":1,"degree":1,_id:0})
+db.Students.find({"degree":"BTech"},{"name":1,"rollno":1,"address":1,_id:0})
+
+******* Logical Operator******************
+1.select where Students "degree":"BTech" and "address":"chennai"
+
+db.Students.find({$and:[{"degree":"BTech"},{"address":"chennai"}]})
+
+2.select where Students "degree":"BTech" or  "address":"chennai"
+db.Students.find({$or:[{"degree":"BTech"},{"address":"chennai"}]})
+
+3.select where Students "degree":"BTech" nor  "address":"chennai"
+db.Students.find({$nor:[{"degree":"BTech"},{"address":"chennai"}]})
+
+4.select where Students "degree":"BTech" and "address":"chennai"  with projection of Name field only
+db.Students.find({$and:[{"degree":"BTech"},{"address":"chennai"}]},{"name":1,_id:0})
+
+
+
+
+
+
+
+
+
+
+
+
